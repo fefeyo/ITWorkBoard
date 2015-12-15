@@ -21,17 +21,26 @@ class MainController extends Controller
 
     public function home(){
         $is_student = \Auth::user()->is_student;
-        return view('home', ["is_student" => $is_student]);
+        $color = $is_student===0 ? '#3498db' : '#e74c3c';
+        return view('home', ["color" => $color]);
     }
 
     public function about()
     {
-        return view('about');
+        $is_student = \Auth::user()->is_student;
+        $color = $is_student===0 ? '#3498db' : '#e74c3c';
+        return view('about', ["color" => $color]);
     }
 
     public function workboard()
     {
-        return view('workboard');
+        $is_student = \Auth::user()->is_student;
+        $color = $is_student===0 ? '#3498db' : '#e74c3c';
+        return view('workboard', ["color" => $color]);
+    }
+
+    public function postwork(){
+        return view('company/postwork');
     }
 
     /**

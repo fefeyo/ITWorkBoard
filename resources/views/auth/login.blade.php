@@ -54,7 +54,7 @@
               <div class="col-md-6 col-md-offset-4">
                 <button type="submit" class="btn btn-primary" style="margin-right: 15px;">
                   ログイン
-                </button>
+                </button><br>
                 <a href="/password/email">パスワードを忘れましたか？</a>
               </div>
             </div>
@@ -65,3 +65,11 @@
   </div><!-- .row -->
 </div><!-- .container-fluid -->
 @endsection
+
+@section('addJs')
+<script type="text/javascript">
+  $(function(){
+    $('.navbar').css('background', '#000');
+  });
+</script>
+@stop

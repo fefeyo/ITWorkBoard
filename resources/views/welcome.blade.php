@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>ITお仕事掲示板</title>
+    <title>ITWorkBoard</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Patrick+Hand+SC'rel='stylesheet'type='text/css'>
     <link rel="stylesheet" type="text/css" href="{{asset('css/style.css')}}">
