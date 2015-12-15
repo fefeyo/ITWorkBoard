@@ -4,8 +4,6 @@
     <meta charset="utf-8">
     <title>{{$title or "ITWorkBoard"}}</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link href='http://fonts.googleapis.com/css?family=Patrick+Hand+SC'rel='stylesheet'type='text/css'>
-    <link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css" />
     <link rel="stylesheet" type="text/css" href="{{asset('css/style.css')}}">
     @yield('addCss')
 </head>

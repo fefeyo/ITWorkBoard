@@ -1,0 +1,19 @@
+#edit_form {
+    width: 70%;
+    margin: 5% auto;
+    border: 2px solid black;
+    padding: 5% 10%;
+}
+.form-control {
+    font-size: 1.0em;
+}
+
+.language {
+    margin: 10px, 0;
+}
+
+@media screen and (max-width: 767px){
+    #edit_form {
+        width: 100%;
+    }
+}

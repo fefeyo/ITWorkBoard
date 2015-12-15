@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\UserProfile;
+use Auth;
 
 class ProfileController extends Controller
 {
@@ -18,28 +20,29 @@ class ProfileController extends Controller
     {
         $is_student = \Auth::user()->is_student;
         $color = $is_student===0 ? '#3498db' : '#e74c3c';
-        // $profile = \DB::table('user_profile')->where('user_id', '=', \Auth::user()->id)->get();
+        $user = \App\UserProfile::where('user_id', '=', Auth::user()->id)->get()[0];
         $data = [
-        '名前' => 'さかた',
-        '性別' => '男',
-        '誕生日' => '2015/7/29',
-        '住所' => '大阪府高槻市芝生町2丁目21-28-612',
-        '電話番号' => '090-6669-7444',
-        '大学名' => '京都コンピュータ学院',
-        '学部' => 'メディア情報',
-        'Github' => 'https://github/fefeyo',
+        '名前' => $user['name'],
+        '性別' => $user['gender'],
+        '誕生日' => $user['birth'],
+        '住所' => $user['address'],
+        '電話番号' => $user['phone_number'],
+        '大学名' => $user['collage'],
+        '学部' => $user['collage_type'],
+        'Github' => $user['github'],
         ];
+        $tech = json_decode($user['tech'], true);
         $award = [
-        'インターン' => '',
-        'ハッカソン' => '',
-        '仕事' => ''
+        'インターン' => $user['intern'],
+        'ハッカソン' => $user['hackathon'],
+        '仕事' => $user['work']
         ];
-        return view('mypage', ["datas" => $data, "color" => $color, "awards" => $award]);
+        return view('mypage', ["datas" => $data, "color" => $color, "awards" => $award, "tech" => $tech]);
     }
 
     public function edit_profile()
     {
-        $is_student = \Auth::user()->is_student;
+        $is_student = Auth::user()->is_student;
         $color = $is_student===0 ? '#3498db' : '#e74c3c';
         $langs = [
         'java' => 'Java',
@@ -59,100 +62,33 @@ class ProfileController extends Controller
         return view('profile/edit_profile', ['color' => $color, 'langs' => $langs]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    function getProfile()
+    {
+        $user = UserProfile::where('user_id', '=', Auth::user()->id);
+    }
+
+    public function create(Request $request)
     {
         // //　プロフィール登録
-        // $inputs = \Request::all();
-        // $tech_items = [
-        // 'java' => $inputs['java'],
-        // 'c' => $inputs['c'],
-        // 'cp' => $inputs['cp'],
-        // 'python' => $inputs['python'],
-        // 'cs' => $inputs['cs'],
-        // 'obc' => $inputs['obc'],
-        // 'perl' => $inputs['perl'],
-        // 'html' => $inputs['html'],
-        // 'css' => $inputs['css'],
-        // 'js' => $inputs['js'],
-        // 'php' => $inputs['php'],
-        // 'ruby' => $inputs['ruby'],
-        // 'scala' => $inputs['scala'],
-        // ];
-        // $tech = json_encode($tech);
-        // UserProfile::create(
-        //     'name' => $inputs['name'],
-        //     'gender' => $inputs['gender'],
-        //     'birth' => $inputs['birth'],
-        //     'phone_number' => $inputs['phone_number'],
-        //     'collage' => $inputs['collage'],
-        //     'collage_type' => $inputs['collage_type'],
-        //     'github' => $inputs['github'],
-        //     'intern' => $inputs['intern'],
-        //     'hackathon' => $inputs['hackathon'],
-        //     'work' => $inputs['work'],
-        //     'tech' => $tech
-        //     );
-        // return redirect('home');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $inputs = $request->all();
+        $tech_items = [
+        'java' => $inputs['java'],
+        'c' => $inputs['c'],
+        'cp' => $inputs['cp'],
+        'python' => $inputs['python'],
+        'cs' => $inputs['cs'],
+        'obc' => $inputs['obc'],
+        'perl' => $inputs['perl'],
+        'html' => $inputs['html'],
+        'css' => $inputs['css'],
+        'js' => $inputs['js'],
+        'php' => $inputs['php'],
+        'ruby' => $inputs['ruby'],
+        'scala' => $inputs['scala'],
+        ];
+        $tech = json_encode($tech_items);
+        $inputs += ['user_id' => Auth::user()->id, 'tech' => $tech];
+        UserProfile::create($inputs);
+        return redirect('mypage');
     }
 }
