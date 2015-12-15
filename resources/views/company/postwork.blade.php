@@ -3,13 +3,13 @@
 @include('parts/navbar')
 
 @section('content')
-ホーム画面
+仕事を投稿
 @stop
 
 @section('addJs')
 <script type="text/javascript">
     $(function(){
-        $('.navbar').css('background', '{{$color}}');
+        $('.navbar').css('background', '#e74c3c');
     });
 </script>
 @stop

@@ -1,4 +1,4 @@
-@extends('common/base_layout  ')
+@extends('common/base_layout')
 
 @include('parts/navbar')
 
@@ -14,8 +14,10 @@
             <strong>エラー</strong>入力内容に不備があります！<br><br>
             <ul>
               @foreach ($errors->all() as $error)
-              @if($error === "validation.unique")
+              @if($error === 'validation.unique')
               <li>既にこのメールアドレスが登録されています。</li>
+              @elseif($error === 'validation.min.string')
+              パスワードは6文字以上入力してください
               @endif
               @endforeach
             </ul>
@@ -68,3 +70,11 @@
   </div><!-- .row -->
 </div><!-- .container-fluid -->
 @endsection
+
+@section('addJs')
+<script type="text/javascript">
+  $(function(){
+    $('.navbar').css('background', '#000');
+  });
+</script>
+@stop

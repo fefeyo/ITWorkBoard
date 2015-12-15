@@ -14,6 +14,9 @@ class CreateCompanyProfileTable extends Migration
     {
         Schema::create('company_profile', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name');
+            $table->string('phone_number');
+            $table->text('work');
             $table->timestamps();
         });    }
 

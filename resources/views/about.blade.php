@@ -3,7 +3,7 @@
 @include('parts/navbar')
 
 @section('content')
-ホーム画面
+このサイトについて
 @stop
 
 @section('addJs')

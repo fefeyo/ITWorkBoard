@@ -1,7 +1,7 @@
 <nav class="navbar navbar-default">
     <div class="container">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"></button>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">三</button>
             <a href="/" class="navbar-brand">ITWorkBoard</a>
         </div>
         {{-- メニュー --}}
@@ -9,8 +9,12 @@
             {{-- 左寄せメニュー --}}
             @if(!Auth::guest())
             <ul class="nav navbar-nav">
-                <li><a href="/mypage">このサイトについて</a></li>
+                <li><a href="/home">マイページ</a></li>
                 <li><a href="/workboard">ワークボード</a></li>
+                @if(Auth::user() -> is_student === 1)
+                <li><a href="/postwork">仕事を投稿する</a></li>
+                @endif
+                <li><a href="/about">このサイトについて</a></li>
             </ul>
             @endif
             {{-- 右寄せメニュー --}}
