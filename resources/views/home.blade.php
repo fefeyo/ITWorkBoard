@@ -12,4 +12,5 @@
         $('.navbar').css('background', '{{$color}}');
     });
 </script>
+hello
 @stop
