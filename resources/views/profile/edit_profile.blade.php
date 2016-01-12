@@ -1,4 +1,4 @@
-]@extends('common/base_layout')
+@extends('common/base_layout')
 
 @section('addCss')
 <link rel="stylesheet" type="text/css" href="{{asset('css/edit_profile.css')}}">

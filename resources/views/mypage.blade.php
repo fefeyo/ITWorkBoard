@@ -8,7 +8,10 @@
 
 @section('content')
 <div class="col-md-6">
-    <h1>マイプロフィール</h1>
+    <div class="title">
+        <h1 class="inline">マイプロフィール</h1>
+        {!! link_to('mypage/edit_profile', 'プロフィールを編集する') !!}
+    </div>
     @foreach($datas as $key => $data)
     <div class="panel panel-info">
         <div class="panel-heading">{{$key}}</div>
@@ -31,7 +34,7 @@
 </div>
 
 <div class="col-md-6">
-    <h1>これまでの実績</h1>
+    <h1 class="title">これまでの実績</h1>
     @foreach($awards as $key => $award)
     <div class="panel panel-info">
         <div class="panel-heading">{{$key}}</div>

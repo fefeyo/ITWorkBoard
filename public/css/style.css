@@ -5,6 +5,11 @@ html, body {
     font-family: "Meiryo", "メイリオ";
 }
 
+h1,h2,h3,div,p,section {
+    margin: 0;
+    padding: 0;
+}
+
 h1 {
     font-size: 1.3em;x
     margin-bottom: 1.0em;
@@ -16,6 +21,11 @@ h2 {
 
 h3 {
     font-size: 1.1em;
+}
+
+.inline {
+    display: inline;
+    margin-right: 1.0em;
 }
 
 .navbar-default .navbar-nav>li>a {

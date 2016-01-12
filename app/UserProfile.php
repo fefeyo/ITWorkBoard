@@ -23,4 +23,6 @@ class UserProfile extends Model
     'work',
     'tech'
     ];
+
+    protected $dates = ['created_at', 'updated_at'];
 }

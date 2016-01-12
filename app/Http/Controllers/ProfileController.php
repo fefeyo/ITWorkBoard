@@ -62,9 +62,9 @@ class ProfileController extends Controller
         return view('profile/edit_profile', ['color' => $color, 'langs' => $langs]);
     }
 
-    function getProfile()
+    public function getProfile()
     {
-        $user = UserProfile::where('user_id', '=', Auth::user()->id);
+        return $user = UserProfile::where('user_id', '=', Auth::user()->id)->first();
     }
 
     public function create(Request $request)

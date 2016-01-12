@@ -16,6 +16,11 @@ CanResetPasswordContract
 {
     use Authenticatable, Authorizable, CanResetPassword;
 
+    public function profile()
+    {
+        return $this->hasOne(UserProfile::class);
+    }
+
     /**
      * The database table used by the model.
      *
