@@ -47,14 +47,14 @@
           <td>Reader株式会社</td>
       </tr>
       <tr>
-          <td>15/12/20(日)</td>
-          <td>26日</td>
-          <td>観光ポータルサイト制作</td>
-          <td>35万</td>
-          <td>4人</td>
-          <td>Portal株式会社</td>
+        <td>15/12/20(日)</td>
+        <td>26日</td>
+        <td>観光ポータルサイト制作</td>
+        <td>35万</td>
+        <td>4人</td>
+        <td>Portal株式会社</td>
       </tr>
-  </tbody>
+    </tbody>
 </table>
 
 @stop

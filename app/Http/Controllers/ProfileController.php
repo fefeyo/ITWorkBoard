@@ -18,14 +18,51 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        $is_student = \Auth::user()->is_student;
+        $is_student = Auth::user()->is_student;
         $color = $is_student===0 ? '#3498db' : '#e74c3c';
-        $user = \App\UserProfile::where('user_id', '=', Auth::user()->id)->get()[0];
+
+        $user = UserProfile::find(Auth::user()-> id);
+        if($user === null){
+            $tech_items = [
+            'Java' => 0,
+            'C' => 0,
+            'C++' => 0,
+            'Python' => 0,
+            'C#' => 0,
+            'Objective-C' => 0,
+            'Perl' => 0,
+            'HTML' => 0,
+            'CSS' => 0,
+            'JavaScript' => 0,
+            'PHP' => 0,
+            'Ruby' => 0,
+            'Scala' => 0
+            ];
+            $tech = json_encode($tech_items);
+
+            $user = [
+            "user_id" => Auth::user()->id,
+            "name" => "",
+            "gender" => "",
+            "birth" => "",
+            "address" => "",
+            "phone_number" => "",
+            "collage" => "",
+            "collage_type" => "",
+            "github" => "",
+            "intern" => "",
+            "hackathon" => "",
+            "work" => "",
+            "tech" => $tech,
+            ];
+            UserProfile::create($user);
+        }
         $data = [
         '名前' => $user['name'],
-        '性別' => $user['gender'],
+        '性別' => $user['gender']==="man" ? "男":"女",
         '誕生日' => $user['birth'],
         '住所' => $user['address'],
+        "メールアドレス" => Auth::user()->email,
         '電話番号' => $user['phone_number'],
         '大学名' => $user['collage'],
         '学部' => $user['collage_type'],
@@ -37,6 +74,7 @@ class ProfileController extends Controller
         'ハッカソン' => $user['hackathon'],
         '仕事' => $user['work']
         ];
+
         return view('mypage', ["datas" => $data, "color" => $color, "awards" => $award, "tech" => $tech]);
     }
 
@@ -44,27 +82,18 @@ class ProfileController extends Controller
     {
         $is_student = Auth::user()->is_student;
         $color = $is_student===0 ? '#3498db' : '#e74c3c';
-        $langs = [
-        'java' => 'Java',
-        'c' => 'C',
-        'cp' => 'C++',
-        'python' => 'Python',
-        'cs' => 'C#',
-        'obc' => 'Objective-C',
-        'perl' => 'Perl',
-        'html' => 'HTML',
-        'css' => 'CSS',
-        'js' => 'JavaScript',
-        'php' => 'PHP',
-        'ruby' => 'Ruby',
-        'scala' => 'Scala'
-        ];
-        return view('profile/edit_profile', ['color' => $color, 'langs' => $langs]);
-    }
 
-    public function getProfile()
-    {
-        return $user = UserProfile::where('user_id', '=', Auth::user()->id)->first();
+        $user = UserProfile::find(Auth::user()->id);
+        if($user != null){
+            $user["isMan"] = $user["gender"]==="man";
+            $user["isWoman"] = $user["gender"]==="woman";
+        }else{
+            $user["isMan"] = true;
+        }
+        $tech = json_decode($user['tech'], true);
+        $langs = ['Java','C','C++','Python','C#','Objective-C','Perl','HTML','CSS','JavaScript','PHP','Ruby','Scala'];
+
+        return view('profile/edit_profile', ["user" => $user, "tech" => $tech, 'color' => $color, 'langs' => $langs]);
     }
 
     public function create(Request $request)
@@ -72,23 +101,24 @@ class ProfileController extends Controller
         // //　プロフィール登録
         $inputs = $request->all();
         $tech_items = [
-        'java' => $inputs['java'],
-        'c' => $inputs['c'],
-        'cp' => $inputs['cp'],
-        'python' => $inputs['python'],
-        'cs' => $inputs['cs'],
-        'obc' => $inputs['obc'],
-        'perl' => $inputs['perl'],
-        'html' => $inputs['html'],
-        'css' => $inputs['css'],
-        'js' => $inputs['js'],
-        'php' => $inputs['php'],
-        'ruby' => $inputs['ruby'],
-        'scala' => $inputs['scala'],
+        'Java' => $inputs['Java'],
+        'C' => $inputs['C'],
+        'C++' => $inputs['C++'],
+        'Python' => $inputs['Python'],
+        'C#' => $inputs['C#'],
+        'Objective-C' => $inputs['Objective-C'],
+        'Perl' => $inputs['Perl'],
+        'HTML' => $inputs['HTML'],
+        'CSS' => $inputs['CSS'],
+        'JavaScript' => $inputs['JavaScript'],
+        'PHP' => $inputs['PHP'],
+        'Ruby' => $inputs['Ruby'],
+        'Scala' => $inputs['Scala'],
         ];
         $tech = json_encode($tech_items);
-        $inputs += ['user_id' => Auth::user()->id, 'tech' => $tech];
-        UserProfile::create($inputs);
+        $inputs += ['tech' => $tech];
+        UserProfile::find(Auth::user()->id)->update($inputs);
+
         return redirect('mypage');
     }
 }

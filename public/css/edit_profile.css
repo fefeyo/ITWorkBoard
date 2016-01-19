@@ -7,6 +7,19 @@
     -moz-box-shadow: 10px 10px 6px -6px #777;
     box-shadow: 10px 10px 6px -6px #777;
 }
+
+h3 {
+    margin: 10px 0;
+}
+
+.language {
+    margin: 5px 0;
+}
+
+.submit {
+    margin-top: 10px;
+}
+
 .form-control {
     font-size: 1.0em;
 }
