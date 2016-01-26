@@ -1,5 +1,8 @@
 <?php
 use App\UserProfile;
+use App\User;
+use App\Post;
+use App\CompanyProfile;
 
 Route::get('', 'MainController@index');
 
@@ -22,5 +25,17 @@ Route::get('auth/register', 'Auth\AuthController@getRegister');
 Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 Route::get('debug', function(){
-    return Auth::user()->email;
+    // $result = User::create([
+    //     'name' => "pino",
+    //     'is_student' => false,
+    //     'email' => "pino@pino.com",
+    //     'password' => bcrypt("metukiringa"),
+    //     ]);
+    // return $result;
+    $post = Post::find(1);
+    return remainDate('2016/01/31');
 });
+
+function remainDate($day) {
+    return intval((strtotime($day) - strtotime(date('Y/m/d'))) / (60*60*24));
+}

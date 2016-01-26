@@ -2,8 +2,20 @@
 
 @include('parts/navbar')
 
+@section('addCss')
+<link rel="stylesheet" type="text/css" href="{{asset('css/mypage.css')}}">
+@stop
+
 @section('content')
-仕事を投稿
+<h1 class="title">仕事を投稿</h1>
+<div id="board">
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+</div>
 @stop
 
 @section('addJs')

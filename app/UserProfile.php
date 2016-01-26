@@ -6,10 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class UserProfile extends Model
 {
+
+    public function profile()
+    {
+        return $this->hasOne(CompanyProfile::class);
+    }
+
     protected $table = 'user_profile';
 
     protected $fillable = [
-    'user_id',
+    'student_id',
     'name',
     'gender',
     'birth',

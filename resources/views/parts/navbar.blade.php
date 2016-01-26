@@ -11,7 +11,7 @@
             <ul class="nav navbar-nav">
                 <li><a href="/mypage">マイページ</a></li>
                 <li><a href="/workboard">ワークボード</a></li>
-                @if(Auth::user() -> is_student === 1)
+                @if(!Auth::user()->is_student)
                 <li><a href="/postwork">仕事を投稿する</a></li>
                 @endif
                 <li><a href="/about">このサイトについて</a></li>

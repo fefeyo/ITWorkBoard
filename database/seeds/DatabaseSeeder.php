@@ -3,6 +3,8 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 use App\User;
+use App\Post;
+use Carbon\Carbon;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,6 +18,7 @@ class DatabaseSeeder extends Seeder
         Model::unguard();
 
         $this->call(UserTableSeeder::class);
+        $this->call(PostSeeder::class);
         $this->command->info('usertable_seeded!');
 
         Model::reguard();
@@ -30,16 +33,35 @@ class UserTableSeeder extends Seeder
         for($i = 1;$i < 6;$i++){
             User::create([
                 'name' => 'people'.$i,
-                'is_student' => "0",
+                'is_student' => true,
                 'email' => 'email@people'.$i.'.com',
-                'password' => $i
+                'password' => bcrypt('student')
                 ]);
         }
         User::create([
             'name' => 'フェフェ株式会社',
-            'is_student' => "1",
+            'is_student' => false,
             'email' => 'email@company.com',
-            'password' => 'company'
+            'password' => bcrypt('company')
             ]);
+    }
+}
+
+class PostSeeder extends Seeder
+{
+    public function run()
+    {
+        for($i = 0; $i < 100; $i++){
+            Post::create([
+                'company_id' => $i,
+                'company_name' => 'カンパニー'.$i,
+                'title' => "タイトル".$i,
+                'category_id' => $i,
+                'reward' => $i * 10000,
+                'remain' => $i,
+                'limit' => Carbon::today()->addDays($i),
+                'description' => "説明".$i
+                ]);
+        }
     }
 }

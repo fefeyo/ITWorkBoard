@@ -14,7 +14,7 @@
     </div>
 
     <footer class="footer" style="background:{{$color or '#000'}}">
-        <div class="container">
+        <div class="footer">
             <p style="text-align: center; color: white">©Sakata Yu</p>
         </div>
     </footer>

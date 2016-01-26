@@ -11,7 +11,7 @@
 <h1 style="text-align: center">プロフィール編集</h1>
 
 <div id="edit_form">
-    {!! Form::open(['files' => true]) !!}
+    {!! Form::open() !!}
     <div class="form-group">
         <h3>名前</h3>
         {!! Form::text('name', $user["name"], ['class' => 'form-control']) !!}
@@ -23,7 +23,7 @@
         <h3>住所</h3>
         {!! Form::text('address', $user["address"], ['class' => 'form-control']) !!}
         <h3>電話番号</h3>
-        {!! Form::text('phone_number', $user["phone_number"], ['class' => 'form-control']) !!}
+        {!! Form::number('phone_number', $user["phone_number"], ['class' => 'form-control']) !!}
         <h3>大学名</h3>
         {!! Form::text('collage', $user["collage"], ['class' => 'form-control']) !!}
         <h3>学部</h3>
@@ -44,7 +44,7 @@
             0 - 使用したことがない<br>
             1 - 授業などで使用したことがある<br>
             2 - リファレンスを見れば基礎はできる<br>
-            3 - リファレンスを見なくても基礎は出来る<br>
+            3 - リファレンスを見なくても基礎が出来る<br>
             4 - 応用ができ、実務で使用したことがある<br>
             5 - ライブラリやフレームワークなどを開発したことがある<br>
         </p>
